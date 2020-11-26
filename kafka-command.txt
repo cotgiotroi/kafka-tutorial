@@ -1,0 +1,43 @@
+Finding earliest offset
+./kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list 10.240.183.1:8092 --partitions 0,1,2  --time -1 --topic <topicname>
+
+See data from a topic
+./kafka-console-consumer.sh --zookeeper 10.240.183.1:8775 --topic <topicname> --from-beginning
+
+Describe topic
+./kafka-topics.sh --describe --zookeeper 10.240.183.1:8775 --topic <topicname>
+
+Delete a topic
+./kafka-topics.sh --delete --zookeeper 10.240.183.1:8775 --topic <topicname>
+
+Read data form topic (consumer)
+./kafka-console-consumer.sh --bootstrap-server <kafka-server>:8092 --topic <topic-name>
+
+List all topics
+./kafka-topics.sh --zookeeper 10.240.183.1:8775 --list
+
+Create kafka topic
+./kafka-topics.sh --create --zookeeper 10.240.183.1:8775 --replication-factor 3 --partitions 1 --topic <topicname>
+
+Add partition:
+./kafka-topics.sh --zookeeper 10.240.183.1:8775 --alter --topic test_https_64_r1 --partitions 64
+
+Check consumer offset
+kafka-run-class kafka.tools.ConsumerOffsetChecker --topic test --zookeeper localhost:2181 
+    --group test_group
+	
+	
+Produce to topic
+./bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-replicated-topic	
+
+./kafka-topics.sh --describe --zookeeper 10.240.183.1:8775 --topic vas_https_classified_v2
+
+
+1. Xóa config cho topic
+./kafka-configs.sh --zookeeper 10.240.183.1:8775 --alter --entity-type topics --entity-name campaign_test --delete-config 'retention.ms'
+2. Thêm config cho topic
+./kafka-configs.sh --zookeeper 10.60.129.62:8775 --alter --entity-type topics --entity-name add_promotion_sms --add-config 'retention.ms=46800000' 
+3. Mô tả config cho topic
+./kafka-configs.sh --zookeeper 10.240.183.1:8775 --entity-type topics --entity-name campaign_test  --describe
+
+./kafka-topics.sh --create --zookeeper 10.60.129.62:8775 --replication-factor 2 --partitions 3 --topic add_promotion_online --config retention.ms=604800000

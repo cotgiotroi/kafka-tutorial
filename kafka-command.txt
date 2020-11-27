@@ -41,3 +41,27 @@ Produce to topic
 ./kafka-configs.sh --zookeeper 10.240.183.1:8775 --entity-type topics --entity-name campaign_test  --describe
 
 ./kafka-topics.sh --create --zookeeper 10.60.129.62:8775 --replication-factor 2 --partitions 3 --topic add_promotion_online --config retention.ms=604800000
+
+
+
+-------------------
+Proceduce: 
+
+./bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic topic-one \ 
+--property parse.key=true \ 
+--property key.separator=":" 
+
+ 
+
+Consumer: 
+
+./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic-one \  
+--property print.key=true \ 
+--property key.separator="-" 
+
+ 
+
+consume message from offset 
+./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic-one \ 
+--partition 0 \ 
+--offset 1 
